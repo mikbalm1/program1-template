@@ -12,16 +12,15 @@ class Star{
 	public:
         
 		Planet ** planets;
-        	Star();
+        Star();
 		~Star();
-        	int addPlanet();
+        int addPlanet();
 		bool removePlanet(int);
-        	Planet * getFurthest();
+        Planet * getFurthest();
 		Planet * getPlanet(int);
-        	void orbit();
-        	void printStarInfo();
+        void orbit();
+        void printStarInfo();
 		int getCurrentNumPlanets() { return current_planets; }
-        	//you may add any additional methodas you may need.
 };
 
 #endif

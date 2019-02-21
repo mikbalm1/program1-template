@@ -7,7 +7,7 @@
 Star::Star() {
     	
 	this -> current_planets = 0;
-    	this -> next_id = 0;
+    this -> next_id = 0;
 	this -> planets = NULL;
 }
 

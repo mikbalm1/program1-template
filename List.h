@@ -12,9 +12,9 @@ class List {
 
 		List();
 		~List();
-		void insert(int index, Planet * p);
-		Planet * read(int index);
-		bool remove(int index);
+		void insert(int, Planet);
+		Planet * read(int);
+		bool remove(int);
 		unsigned size();
 }
 

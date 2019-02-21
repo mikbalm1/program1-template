@@ -11,12 +11,11 @@ class Planet{
 	public:
 		Planet(){ this -> id = -1; };
 		Planet(int);
-        	int orbit();
+        int orbit();
 		long getID() { return id; }
-        	int getDistance() { return distance; }
-        	int getPos() { return pos; }
+        int getDistance() { return distance; }
+        int getPos() { return pos; }
 		char getType() { return type; }
-		//you may add any additional methods you may need.
 };
 
 
