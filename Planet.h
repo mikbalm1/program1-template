@@ -3,13 +3,17 @@
 
 
 class Planet{
+
 	private:
-		int id;
+
+		long id;
 		int pos;
 		int distance;
 		char type;
+
 	public:
-		Planet(){ this -> id = -1; };
+
+		//Planet(){ this -> id = -1; };
 		Planet(int);
         int orbit();
 		long getID() { return id; }

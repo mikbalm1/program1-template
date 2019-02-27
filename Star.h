@@ -3,24 +3,54 @@
 #include "Planet.h"
 
 class Star{
-	
+
 	private:
 
-        	int current_planets;
-        	int next_id;
+		int current_planets;
+		int next_id;
+
+	public:
+
+		Planet ** planets;
+		Star();
+		~Star();
+		int addPlanet();
+		bool removePlanet(int);
+		Planet * getFurthest();
+		Planet * getPlanet(int);
+		void orbit();
+		void printStarInfo();
+		int getCurrentNumPlanets() { return current_planets; }
+};
+
+class Starlist{
+
+	private:
 	
 	public:
-        
-		Planet ** planets;
-        Star();
-		~Star();
-        int addPlanet();
-		bool removePlanet(int);
-        Planet * getFurthest();
-		Planet * getPlanet(int);
-        void orbit();
-        void printStarInfo();
-		int getCurrentNumPlanets() { return current_planets; }
+	Starlist();
+	~Starlist();
+	long addPlanet();
+	bool removePlanet(int);
+	Planet * getPlanet(int);
+	void orbit();
+	void printStarInfo();
+	unsigned getCurrentNumPlanets();
+};
+
+class Starvector{
+
+	private:
+	
+	public:
+	Starvector();
+	~Starvector();
+	long addPlanet();
+	bool removePlanet(int);
+	Planet * getPlanet(int);
+	void orbit();
+	void printStarInfo();
+	unsigned getCurrentNumPlanets();
 };
 
 #endif
