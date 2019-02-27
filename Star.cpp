@@ -97,10 +97,10 @@ void Star::printStarInfo() {
 }
 
 Starlist::Starlist() {
-	
+	this -> list;
 }
 Starlist::~Starlist() {
-	
+	delete list;
 }
 long Starlist::addPlanet(){
 	
@@ -118,30 +118,48 @@ void Starlist::printStarInfo() {
 	
 }
 unsigned Starlist::getCurrentNumPlanets() {
-	
+	return list.size();
 }
 
 Starvector::Starvector() {
-	
+	this -> vec;
 }
 Starvector::~Starvector() {
-	
+	delete [] vec;
 }
 long Starvector::addPlanet() {
-	
+	Planet new_planet = new Planet();
+	vec.insert(1, new_planet);
+	return new_planet.getID();
 }
-bool Starvector::removePlanet(int) {
-	
+bool Starvector::removePlanet(int planet_id) {
+	if(getPlanet(planet_id) == NULL) return false;
+	for(int i = 0; i < vec.size(); i++) {
+		if(vec[i].getID() == planet_id) {
+			return vec.remove(planet_id); //
+		}
+	}
+	return false;
+
 }
-Planet * Starvector::getPlanet(int) {
-	
+Planet * Starvector::getPlanet(int planet_id) {
+	Planet * searched_planet = NULL;
+	for(int i = 0; i < vec.size(); i++) {
+		if(vec[i].getID() == planet_id) {
+			searched_planet = vec[i];
+		}
+	}
+	return searched_planet;
 }
 void Starvector::orbit() {
-	
+	for (int i = 0; i < size(); i++) {
+		vec[i]->orbit();
+	}
+	return;
 }
 void Starvector::printStarInfo() {
 	
 }
 unsigned Starvector::getCurrentNumPlanets() {
-	
+	return vec.size();
 }
