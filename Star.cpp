@@ -97,19 +97,19 @@ void Star::printStarInfo() {
 }
 
 Starlist::Starlist() {
-	this -> list;
+	this -> list = NULL;
 }
 Starlist::~Starlist() {
 	delete list;
 }
 long Starlist::addPlanet(){
-	
+	return NULL;
 }
 bool Starlist::removePlanet(int) {
-	
+	return true;
 }
 Planet * Starlist::getPlanet(int) {
-	
+	return NULL;
 }
 void Starlist::orbit() {
 	
@@ -117,26 +117,26 @@ void Starlist::orbit() {
 void Starlist::printStarInfo() {
 	
 }
-unsigned Starlist::getCurrentNumPlanets() {
-	return list.size();
+unsigned Starlist::getCurrentNumPlanets(){
+	return list->size();
 }
 
 Starvector::Starvector() {
-	this -> vec;
+	this -> vec = NULL;
 }
 Starvector::~Starvector() {
-	delete [] vec;
+	delete vec;
 }
 long Starvector::addPlanet() {
-	Planet new_planet = new Planet();
-	vec.insert(1, new_planet);
-	return new_planet.getID();
+	Planet * new_planet = new Planet(rand() % 3001);
+	vec->insert(1, new_planet);
+	return new_planet->getID();
 }
 bool Starvector::removePlanet(int planet_id) {
 	if(getPlanet(planet_id) == NULL) return false;
-	for(int i = 0; i < vec.size(); i++) {
-		if(vec[i].getID() == planet_id) {
-			return vec.remove(planet_id); //
+	for(int i = 0; i < vec->size(); i++) {
+		if(vec->read(i)->getID() == planet_id) {
+			return vec->remove(planet_id); //
 		}
 	}
 	return false;
@@ -144,22 +144,21 @@ bool Starvector::removePlanet(int planet_id) {
 }
 Planet * Starvector::getPlanet(int planet_id) {
 	Planet * searched_planet = NULL;
-	for(int i = 0; i < vec.size(); i++) {
-		if(vec[i].getID() == planet_id) {
-			searched_planet = vec[i];
+	for(int i = 0; i < vec->size(); i++) {
+		if(vec->read(i)->getID() == planet_id) {
+			searched_planet = vec[i].read(planet_id);
 		}
 	}
 	return searched_planet;
 }
 void Starvector::orbit() {
-	for (int i = 0; i < size(); i++) {
-		vec[i]->orbit();
+	for (int i = 0; i < vec->size(); i++) {
+		vec->read(i)->orbit();
 	}
-	return;
 }
 void Starvector::printStarInfo() {
 	
 }
-unsigned Starvector::getCurrentNumPlanets() {
-	return vec.size();
+unsigned Starvector::getCurrentNumPlanets(){
+	return vec->size();
 }
