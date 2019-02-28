@@ -28,7 +28,7 @@ class Star{
 class Starlist{
 
 	private:
-	List * list = new List();
+	List * list;
 	public:
 	Starlist();
 	~Starlist();
@@ -43,7 +43,7 @@ class Starlist{
 class Starvector{
 
 	private:
-	Vector * vec = new Vector();
+	Vector * vec;
 	public:
 	Starvector();
 	~Starvector();

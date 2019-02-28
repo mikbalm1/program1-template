@@ -1,5 +1,9 @@
+#include <iostream>
+#include <cstdlib>
+#include "Star.h"
 #include "Planet.h"
-#include "iostream"
+#include "Vector.h"
+#include "List.h"
 
 
 Planet::Planet(int distance) {

@@ -1,6 +1,9 @@
 #include <iostream>
+#include <cstdlib>
+#include "Star.h"
 #include "Planet.h"
 #include "Vector.h"
+#include "List.h"
 
 Vector::Vector() {
     
@@ -10,7 +13,7 @@ Vector::Vector() {
 
 Vector::~Vector() {
 	
-	for (int i = 0; i < size(); i++) {
+	for (unsigned i = 0; i < size(); i++) {
 		delete vector[i];
 	}
 	delete [] vector;
@@ -18,10 +21,10 @@ Vector::~Vector() {
 
 void Vector::insert(int index, Planet * p) {
     
-	if (index < size()) {
+	if ((unsigned)index < size()) {
         Planet ** new_vector = new Planet * [size() + 1];
-        for (int i = 0; i < size(); i++) {
-            if (i == index) {
+        for (unsigned i = 0; i < size(); i++) {
+            if (i == (unsigned)index) {
                 new_vector[index] = p;
             }
             else {
@@ -36,22 +39,22 @@ void Vector::insert(int index, Planet * p) {
 
 Planet * Vector::read(int index) {
     
-	if (index > size()) return NULL;
+	if ((unsigned)index > size()) return NULL;
 	return vector[index];
 }
 
 bool Vector::remove(int index) {
 
-    if (index > size()) return false;
+    if ((unsigned)index > size()) return false;
     Planet ** new_vector = new Planet * [size() - 1];
-    int inter = 0;
-    for (int i = 0; i < size(); i++) {
-        if (i == index) {
+    unsigned inter = 0;
+    for (unsigned i = 0; i < size(); i++) {
+        if (i == (unsigned)index) {
             delete vector[index];
-            inter = -1;
+            inter = 1;
         }
         else {
-            new_vector[i + inter] = vector[i];
+            new_vector[i - inter] = vector[i];
         }
     }
     delete [] vector;

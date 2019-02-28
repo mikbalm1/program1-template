@@ -1,4 +1,8 @@
 #include <iostream>
+#include <cstdlib>
+#include "Star.h"
+#include "Planet.h"
+#include "Vector.h"
 #include "List.h"
 
 
@@ -12,21 +16,21 @@ List::~List() {
 	Node * current = head;
 	Node * next;
 	
-	while (current != NULL)
+	while (current) //!= NULL)
 	{
 		next = current->next;
 		delete current;
 		current = next;
 	}
 
-	//Keremlerin metodu
+	/*Keremlerin metodu
 	Node * temp = tail;
 	while (tail != NULL) {
 		tail = tail->prev;
 		if (tail != NULL) tail->next = NULL;
 		delete temp;
 		temp = tail;
-	}
+	}*/
 }
 
 /*Node * List::newNode(Planet * p) {
@@ -52,7 +56,7 @@ void List::insert(int index, Planet * p) {
 		return;
 	}
 	
-	if(index > size()) {
+	if((unsigned)index > size()) {
 		while (tail->next != NULL) {
 			tail = tail->next;
 		}
@@ -64,7 +68,7 @@ void List::insert(int index, Planet * p) {
 
 	else {
 		new_node->next=head;
-		for (int i=0; i <= index; i++){
+		for (int i = 0; i <= index; i++){
 			new_node = new_node->next;
 		}
 		listSize++;
@@ -87,7 +91,7 @@ void List::insert(int index, Planet * p) {
 }
 
 Planet * List::read(int index) {
-	if(index > size()) return NULL;
+	if((unsigned)index > size()) return NULL;
 	if(index == 0 && head->next == NULL) return  head->data;
 	Node * temp;
 	temp = head;
@@ -99,7 +103,7 @@ Planet * List::read(int index) {
 
 bool List::remove(int index) {
 	if (head == NULL) return false;
-    if (index > size()) return false;
+    if ((unsigned)index > size()) return false;
 
 	if(index == 0 && head->next == NULL){
 		delete head;
@@ -111,7 +115,7 @@ bool List::remove(int index) {
 	else {
 		Node * temp;
 		temp = head;
-		for (int i = 0; i <= size(); i++){
+		for (unsigned i = 0; i <= size(); i++){
 			temp = temp->next;
 		}
 		delete temp;
