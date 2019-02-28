@@ -8,17 +8,19 @@
 
 Planet::Planet(int distance) {
 
+	long temp_id = long(this);
+	this -> id = temp_id;
 	this -> distance = distance;
-	distance = (rand() % 3001);
+	this -> pos = (rand() % 360);
+	//distance = (rand() % 3001);
 	char type_arr[3] = {'h', 'r', 'g'};
 	this -> type = type_arr[rand() % 3];
-	this -> pos = (rand() % 360);
-	id = 123;
-	this -> id = id;
+	
+
 }
 
 int Planet::orbit() {
 	
 	pos = (pos + 1) % 360;
-	return pos;
+	return this -> pos;
 }

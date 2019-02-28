@@ -13,13 +13,13 @@ class Planet{
 
 	public:
 
-		//Planet(){ this -> id = -1; };
+		Planet(){ this -> id = -1; };
 		Planet(int);
         int orbit();
-		long getID() { return id; }
-        int getDistance() { return distance; }
-        int getPos() { return pos; }
-		char getType() { return type; }
+		long getID() { return this->id; }
+        int getDistance() { return this -> distance; }
+        int getPos() { return this -> pos; }
+		char getType() { return this -> type; }
 };
 
 

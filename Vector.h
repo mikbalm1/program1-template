@@ -5,11 +5,12 @@ class Vector{
 
 	private:
 
+	Planet ** vector;
 	    unsigned vectSize;
 	
 	public:
 
-	    Planet ** vector;
+	    
 	    Vector();
 	    ~Vector();
 	    void insert(int,Planet*);
