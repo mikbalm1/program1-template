@@ -160,14 +160,6 @@ bool Starvector::removePlanet(int planet_id) {
 
 }
 Planet * Starvector::getPlanet(int planet_id) {
-	/*Planet * searched_planet = NULL;
-	for(unsigned i = 0; i < vec->size(); i++) {
-		if(vec->read(i)->getID() == planet_id) {
-			searched_planet = vec -> read(planet_id);
-		}
-	}
-	return searched_planet;
-	*/
 	for (unsigned i = 0; i < vec->size(); i++) {
 		Planet * new_planet = vec->read(i);
 		if ((long) new_planet == planet_id) return new_planet;

@@ -57,56 +57,8 @@ void List::insert(int index, Planet * p) {
 	listSize++;
 }
 
-Planet * List::read(int index) {
-	
-	if((unsigned)index >= size()) return NULL;
-	Node * temp = head;
-	for(int i = 0; i < index; i++) {
-		temp = temp->next;
-	}
-	return temp->data;
-}
-
-bool List::remove(int index) {
-	Node * temp = head;
-	if((unsigned)index >= size() || head == NULL) return false;
-	else if(size() == 1) {
-		delete head;
-		head = NULL;
-		delete tail;
-		tail = NULL;
-		return false;
-	}
-	else if(index == 0) {
-		temp = head->next;
-		delete head;
-		head = NULL;
-		temp->prev = NULL;
-		head = temp;
-		listSize--;
-		return true;
-	}
-	else if((unsigned)index == size()) {
-		tail = tail->prev;
-		delete tail->next;
-		listSize--;
-		return true;
-	}
-	else{
-		Node * temp1;
-		Node * temp2;
-		for(int i = 0; i < index; i++) {
-			temp = temp->next;
-		}
-		temp1 = temp->prev;
-		temp1->next = temp->next;
-		temp2 = temp->next;
-		temp2->prev = temp->prev;
-		temp->next->prev = temp->prev;
-		return true;
-	}
-	
-	/*if (head == NULL) return false;
+Planet * List::read(int index) {	
+	if (head == NULL) return false;
     if ((unsigned)index > size()) return false;
 
 	if(index == 0 && head->next == NULL){
@@ -126,7 +78,7 @@ bool List::remove(int index) {
 		temp = NULL;
 		listSize--;
 		return true;
-	}*/
+	}
 }
 
 unsigned List::size() {
