@@ -28,7 +28,7 @@ class Star{
 class Starlist{
 
 	private:
-	List * list;
+	List * list = new List();
 	public:
 	Starlist();
 	~Starlist();

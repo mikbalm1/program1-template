@@ -64,14 +64,12 @@ int main(){
         id_list[i] = p->getID();
     }
     assert(unique(id_list, i));
-cout<< id_list << " " << i <<endl;
     //the new index of planet 20 will be 50 because the previous insert would increment the index
     p = vect->read(50);
     id_list[i++] = p->getID();
     p = vect->read(40);
     id_list[i++] = p->getID();
     assert(unique(id_list, i));
-cout<< id_list << " " << i <<endl;
     cerr << "\n\t=========Test #4 Passed...            ===========\n\n";
 
     cerr << "\n\t=========Test #5: Reading from unititialized vector index (should return NULL)===========\n\n";
@@ -91,7 +89,6 @@ cout<< id_list << " " << i <<endl;
     //RemoveVector
     vect->remove(50);
     vect->remove(40);
-    cerr << vect->size() << endl;
     assert(vect->size() == 49);
     cerr << "\n\t=========Test #7 Passed...            ===========\n\n";
 

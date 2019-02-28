@@ -5,7 +5,7 @@ class Vector{
 
 	private:
 
-	Planet ** vector;
+		Planet ** vector;
 	    unsigned vectSize;
 	
 	public:

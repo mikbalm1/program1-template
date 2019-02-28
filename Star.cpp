@@ -4,7 +4,6 @@
 #include "Planet.h"
 #include "Vector.h"
 #include "List.h"
-//#include "Stdlib.h"
 
 Star::Star() {
     	
@@ -55,7 +54,7 @@ bool Star::removePlanet(int id) {
 		}
 		delete [] planets;
 		planets = newPlanets;
-		current_planets--; //updating
+		current_planets--;
 		return true;
 	}
 	return false;
@@ -100,15 +99,15 @@ void Star::printStarInfo() {
 }
 
 Starlist::Starlist() {
-	list = new List();
+	this -> list = NULL;
 }
 Starlist::~Starlist() {
 	delete list;
 }
 long Starlist::addPlanet(){
-	Planet * p = new Planet(rand() % 3001);
-	list -> insert(0, p);
-	return p -> getID();
+	Planet * new_planet = new Planet(rand() % 3001);
+	list -> insert(list->size(), new_planet);
+	return new_planet -> getID();
 }
 bool Starlist::removePlanet(int id) {
 	return list -> read(id);
@@ -122,8 +121,9 @@ void Starlist::orbit() {
 	}
 }
 void Starlist::printStarInfo() {
-	for (unsigned i = 0; i < list -> size(); i++) {
-		//list -> read(i) -> print();
+	for (int i = 0; (unsigned)i < list->size(); i++) {
+		std::cout << "Planet " << i << " is " << (list->read(i))->getDistance() << " million miles away at pos "
+		<< (list->read(i))->getPos() << " around the star" << std::endl;
 	}
 }
 unsigned Starlist::getCurrentNumPlanets(){
@@ -138,27 +138,42 @@ Starvector::~Starvector() {
 }
 long Starvector::addPlanet() {
 	Planet * new_planet = new Planet(rand() % 3001);
-	vec->insert(0, new_planet);
+	vec->insert(vec->size(), new_planet);
 	return new_planet->getID();
 }
 bool Starvector::removePlanet(int planet_id) {
-	if(getPlanet(planet_id) == NULL) return false;
+	/*if(getPlanet(planet_id) == NULL) return false;
 	for(unsigned i = 0; i < vec->size(); i++) {
 		if(vec->read(i)->getID() == planet_id) {
 			return vec->remove(planet_id); //
+		}
+	}
+	return false;*/
+	
+	for (unsigned i = 0; i < vec->size(); i++) {
+		Planet * new_planet = vec->read(i);
+		if ((long) new_planet == planet_id) {
+			return vec->remove(i);
 		}
 	}
 	return false;
 
 }
 Planet * Starvector::getPlanet(int planet_id) {
-	Planet * searched_planet = NULL;
+	/*Planet * searched_planet = NULL;
 	for(unsigned i = 0; i < vec->size(); i++) {
 		if(vec->read(i)->getID() == planet_id) {
 			searched_planet = vec -> read(planet_id);
 		}
 	}
 	return searched_planet;
+	*/
+	for (unsigned i = 0; i < vec->size(); i++) {
+		Planet * new_planet = vec->read(i);
+		if ((long) new_planet == planet_id) return new_planet;
+	}
+	return vec->read(planet_id);
+
 }
 void Starvector::orbit() {
 	for (unsigned i = 0; i < vec->size(); i++) {
@@ -166,8 +181,9 @@ void Starvector::orbit() {
 	}
 }
 void Starvector::printStarInfo() {
-	for (unsigned i = 0; i < vec -> size(); i++) {
-		//vec -> read(i) -> print();
+	for (unsigned i = 0; i < vec->size(); i++) {
+		std::cout << "Planet " << i << " is " << (vec->read(i))->getDistance() << " million miles away at pos "
+		<< (vec->read(i))->getPos() << " around the star" << std::endl;
 	}
 }
 unsigned Starvector::getCurrentNumPlanets(){

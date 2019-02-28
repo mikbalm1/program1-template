@@ -2,8 +2,6 @@
 #include <cstdlib>
 #include "Star.h"
 #include "Planet.h"
-#include "Vector.h"
-#include "List.h"
 
 
 Planet::Planet(int distance) {

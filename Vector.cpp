@@ -20,70 +20,35 @@ Vector::~Vector() {
 }
 
 void Vector::insert(int index, Planet * p) {
-    
-	/*while ((unsigned) index > size()) {
-		
-		vectSize++;
-	}*/
 	
-	if ((unsigned) index >= size()) { 
-		int an = index - (size() - 1);
-		Planet **temp = new Planet *[size() + an];
-
-		
-		//copies over every element in vect
-		for (int i = 0; i < size(); i++) {
-			temp[i] = vector[i];
+	Planet ** new_vector = NULL;
+	if((unsigned) index > size()) {
+		new_vector = new Planet * [index + 1];
+	
+		for(unsigned i = 0; i < size(); i++) {
+			new_vector[i] = vector[i];
 		}
-		//fills new elements in temp with NULL
-		for (int j = size(); j < size() + an; j++) {
-			temp[j] = NULL;
+		for(unsigned i = size(); i < (unsigned)index; i++) {
+			new_vector[i] = NULL;
 		}
-		//moves "temp" back over to "vect"
-		delete[] vector;
-		vector = temp;
-		vectSize += an;
-		//vectSize = vectSize + (index - size() - 1); 
-		vector[index] = p;
-		return;
+		new_vector[index] = p;
+		vectSize = index + 1;
 	}
 	
-	//if ((unsigned)index < size()) {
-        
-	Planet ** new_vector = new Planet * [size() + 1];
-        
-	for (unsigned i = 0; i < size(); i++) {
-            if (i == (unsigned)index) {
-                new_vector[i] = p;
-            }
-            else {
-                new_vector[i] = vector[i];
-		//vector[i] = NULL;
-            }
-        }
-        delete [] vector;
-        vector = new_vector;
-    //}
-
-	/*Planet ** new_vector = new Planet * [size() + 1];
-	for (unsigned i=0; i<=size(); ++i)
-  	{
-    if (i < (unsigned) index)  // All the elements before the one that must be inserted
-    {
-       new_vector[i] = vector[i];
-    }
-  
-    if (i ==  (unsigned) index)  // The right place to insert the new element
-    {
-      new_vector[i] = p;
-    }
- 
-    if (i >  (unsigned) index)  // Now all the remaining elements
-    {
-      new_vector[i] = vector[i-1];
-    }
-  }*/
-	vectSize++;
+	else {
+		new_vector = new Planet * [size() + 1];
+		for(unsigned i = 0; i < (unsigned)index; i++) {
+			new_vector[i] = vector[i];
+		}
+		new_vector[index] = p;
+		for(unsigned i = index; i < size(); i++) {
+			new_vector[i+1] = vector[i];
+		}
+		vectSize++;
+	}
+	
+	delete [] vector;
+	vector = new_vector;
 }
 
 Planet * Vector::read(int index) {

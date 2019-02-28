@@ -16,93 +16,97 @@ List::~List() {
 	Node * current = head;
 	Node * next;
 	
-	while (current) //!= NULL)
-	{
+	while (current) {
 		next = current->next;
 		delete current;
 		current = next;
 	}
-
-	/*Keremlerin metodu
-	Node * temp = tail;
-	while (tail != NULL) {
-		tail = tail->prev;
-		if (tail != NULL) tail->next = NULL;
-		delete temp;
-		temp = tail;
-	}*/
 }
 
-/*Node * List::newNode(Planet * p) {
-	Node * new_node = (node) malloc(sizeof(struct Node));
-	new_node->data = p;
-	new_node->next = NULL;
-	new_node->prev = NULL;
-	return new_node;
-}*/
-
 void List::insert(int index, Planet * p) {
-	if (p == NULL) {
-		return;
-	}
 
-	struct Node * new_node = (struct Node *)malloc(sizeof(struct Node));
-	new_node->data = p;
-
-	if (head == NULL) {
-		new_node->prev = NULL;
-		head = new_node;
-		listSize++;
+	Node * temp1 = new Node();
+	temp1->data = p;
+	if(head == NULL) {
+		head = temp1;
+		tail = temp1;
+		listSize = 1;
 		return;
 	}
 	
-	if((unsigned)index > size()) {
-		while (tail->next != NULL) {
-			tail = tail->next;
-		}
-		tail->next = new_node;
-		new_node->prev = tail;
-		listSize++;
-		return;
+	if(index == 0) {
+		temp1->next = head;
+		head->prev = temp1;
+		head = head->prev;
 	}
 
+	else if(size() <= (unsigned)index) {
+		temp1->prev = tail;
+		tail->next = temp1;
+		tail = tail->next;
+	}
+	
 	else {
-		new_node->next=head;
-		for (int i = 0; i <= index; i++){
-			new_node = new_node->next;
+		Node * temp2 = head;
+		for(int i = 0; i < index; i++) {
+			temp2 = temp2->next;
 		}
-		listSize++;
+		temp1->prev = temp2;
+		temp1->next = temp2->next;
 	}
-	return;
-
-	/*if (index > size()) {
-		Node * insertedNode;
-		insertedNode->data = p;
-		tail->next = insertedNode;
-		insertedNode->prev = tail;
-	}
-	Node * nnode = newNode(p);
-	//How do I implement the prev node???
-	nnode->next = prev_node->next;
-	prev_node->next = nnode;
-	nnode->prev = prev_node;
-	if (nnode->next != NULL)
-		nnode->next->prev = nnode;*/
+	listSize++;
 }
 
 Planet * List::read(int index) {
-	if((unsigned)index > size()) return NULL;
-	if(index == 0 && head->next == NULL) return  head->data;
-	Node * temp;
-	temp = head;
-	for(int i=0; i <= index; i++) {
-		temp = temp -> next;
+	
+	if((unsigned)index >= size()) return NULL;
+	Node * temp = head;
+	for(int i = 0; i < index; i++) {
+		temp = temp->next;
 	}
 	return temp->data;
 }
 
 bool List::remove(int index) {
-	if (head == NULL) return false;
+	Node * temp = head;
+	if((unsigned)index >= size() || head == NULL) return false;
+	else if(size() == 1) {
+		delete head;
+		head = NULL;
+		delete tail;
+		tail = NULL;
+		return false;
+	}
+	else if(index == 0) {
+		temp = head->next;
+		delete head;
+		head = NULL;
+		temp->prev = NULL;
+		head = temp;
+		listSize--;
+		return true;
+	}
+	else if((unsigned)index == size()) {
+		tail = tail->prev;
+		delete tail->next;
+		listSize--;
+		return true;
+	}
+	else{
+		Node * temp1;
+		Node * temp2;
+		for(int i = 0; i < index; i++) {
+			temp = temp->next;
+		}
+		temp1 = temp->prev;
+		temp1->next = temp->next;
+		temp2 = temp->next;
+		temp2->prev = temp->prev;
+		temp->next->prev = temp->prev;
+		return true;
+	}
+	
+	/*if (head == NULL) return false;
     if ((unsigned)index > size()) return false;
 
 	if(index == 0 && head->next == NULL){
@@ -122,7 +126,7 @@ bool List::remove(int index) {
 		temp = NULL;
 		listSize--;
 		return true;
-	}
+	}*/
 }
 
 unsigned List::size() {

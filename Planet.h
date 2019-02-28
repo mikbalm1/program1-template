@@ -13,7 +13,6 @@ class Planet{
 
 	public:
 
-		Planet(){ this -> id = -1; };
 		Planet(int);
         int orbit();
 		long getID() { return this->id; }
