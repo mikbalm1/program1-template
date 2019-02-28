@@ -28,7 +28,7 @@ void Vector::insert(int index, Planet * p) {
 		for(unsigned i = 0; i < size(); i++) {
 			new_vector[i] = vector[i];
 		}
-		for(unsigned i = size(); i < (unsigned)index; i++) {
+		for(int i = size(); i < index; i++) {
 			new_vector[i] = NULL;
 		}
 		new_vector[index] = p;

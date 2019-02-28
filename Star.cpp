@@ -142,13 +142,6 @@ long Starvector::addPlanet() {
 	return new_planet->getID();
 }
 bool Starvector::removePlanet(int planet_id) {
-	/*if(getPlanet(planet_id) == NULL) return false;
-	for(unsigned i = 0; i < vec->size(); i++) {
-		if(vec->read(i)->getID() == planet_id) {
-			return vec->remove(planet_id); //
-		}
-	}
-	return false;*/
 	
 	for (unsigned i = 0; i < vec->size(); i++) {
 		Planet * new_planet = vec->read(i);

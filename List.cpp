@@ -57,7 +57,17 @@ void List::insert(int index, Planet * p) {
 	listSize++;
 }
 
-Planet * List::read(int index) {	
+Planet * List::read(int index) {
+	
+	if((unsigned)index >= size()) return NULL;
+	Node * temp = head;
+	for(int i = 0; i < index; i++) {
+		temp = temp->next;
+	}
+	return temp->data;
+}
+
+bool List::remove(int index) {
 	if (head == NULL) return false;
     if ((unsigned)index > size()) return false;
 

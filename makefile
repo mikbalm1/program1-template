@@ -5,10 +5,10 @@ CFLAGS=-Wall -Wextra -DDEBUG -g -c -std=c++14
 all: program1
 
 run: all
-	./program1
+	./program4
 
 program1: Star.o Planet.o List.o Vector.o program1.o
-	$(CC) Star.o Planet.o List.o Vector.o program1.o -o program1  
+	$(CC) Star.o Planet.o List.o Vector.o program1.o -o program4
 
 Star.o: Star.cpp 
 	$(CC) $(CFLAGS) Star.cpp
@@ -26,7 +26,7 @@ program1.o: program1.cpp
 	$(CC) $(CFLAGS) program1.cpp 
 
 memcheck: all
-	valgrind --leak-check=full ./program1
+	valgrind --leak-check=full ./program4
 
 clean: 	
 	rm *.o program1
